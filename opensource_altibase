@@ -1,1 +1,78 @@
 opensource altibase compile test
+lswhh@DESKTOP-HQPQNKV:~$ sudo apt update
+lswhh@DESKTOP-HQPQNKV:~$ sudo apt update
+[sudo] password for lswhh:
+Get:1 http://security.ubuntu.com/ubuntu focal-security InRelease [109 kB]
+Hit:2 http://archive.ubuntu.com/ubuntu focal InRelease
+Get:3 http://archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
+Get:4 http://security.ubuntu.com/ubuntu focal-security/main amd64 Packages [395 kB]
+Get:5 http://security.ubuntu.com/ubuntu focal-security/main Translation-en [90.4 kB]
+Get:6 http://security.ubuntu.com/ubuntu focal-security/main amd64 c-n-f Metadata [5584 B]
+Get:7 http://security.ubuntu.com/ubuntu focal-security/restricted amd64 Packages [80.7 kB]
+Get:8 http://security.ubuntu.com/ubuntu focal-security/restricted Translation-en [12.8 kB]
+Get:9 http://security.ubuntu.com/ubuntu focal-security/universe amd64 Packages [521 kB]
+Get:10 http://archive.ubuntu.com/ubuntu focal-backports InRelease [101 kB]
+Get:11 http://security.ubuntu.com/ubuntu focal-security/universe Translation-en [68.6 kB]
+Get:12 http://security.ubuntu.com/ubuntu focal-security/universe amd64 c-n-f Metadata [9364 B]
+Get:13 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 Packages [1256 B]
+Get:14 http://security.ubuntu.com/ubuntu focal-security/multiverse Translation-en [540 B]
+Get:15 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 c-n-f Metadata [116 B]
+Get:16 http://archive.ubuntu.com/ubuntu focal/universe amd64 Packages [8628 kB]
+Get:17 http://archive.ubuntu.com/ubuntu focal/universe Translation-en [5124 kB]
+Get:18 http://archive.ubuntu.com/ubuntu focal/universe amd64 c-n-f Metadata [265 kB]
+Get:19 http://archive.ubuntu.com/ubuntu focal/multiverse amd64 Packages [144 kB]
+Get:20 http://archive.ubuntu.com/ubuntu focal/multiverse Translation-en [104 kB]
+Get:21 http://archive.ubuntu.com/ubuntu focal/multiverse amd64 c-n-f Metadata [9136 B]
+Get:22 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages [699 kB]
+Get:23 http://archive.ubuntu.com/ubuntu focal-updates/main Translation-en [176 kB]
+Get:24 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 c-n-f Metadata [11.3 kB]
+Get:25 http://archive.ubuntu.com/ubuntu focal-updates/restricted amd64 Packages [103 kB]
+Get:26 http://archive.ubuntu.com/ubuntu focal-updates/restricted Translation-en [15.8 kB]
+Get:27 http://archive.ubuntu.com/ubuntu focal-updates/restricted amd64 c-n-f Metadata [348 B]
+Get:28 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 Packages [708 kB]
+Get:29 http://archive.ubuntu.com/ubuntu focal-updates/universe Translation-en [140 kB]
+Get:30 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 c-n-f Metadata [13.7 kB]
+Get:31 http://archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 Packages [20.0 kB]
+Get:32 http://archive.ubuntu.com/ubuntu focal-updates/multiverse Translation-en [4668 B]
+Get:33 http://archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 c-n-f Metadata [552 B]
+Get:34 http://archive.ubuntu.com/ubuntu focal-backports/main amd64 c-n-f Metadata [112 B]
+Get:35 http://archive.ubuntu.com/ubuntu focal-backports/restricted amd64 c-n-f Metadata [116 B]
+Get:36 http://archive.ubuntu.com/ubuntu focal-backports/universe amd64 Packages [3988 B]
+Get:37 http://archive.ubuntu.com/ubuntu focal-backports/universe Translation-en [1448 B]
+Get:38 http://archive.ubuntu.com/ubuntu focal-backports/universe amd64 c-n-f Metadata [224 B]
+Get:39 http://archive.ubuntu.com/ubuntu focal-backports/multiverse amd64 c-n-f Metadata [116 B]
+Fetched 17.7 MB in 7s (2453 kB/s)
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+142 packages can be upgraded. Run 'apt list --upgradable' to see them.
+
+lswhh@DESKTOP-HQPQNKV:~$ sudo apt upgrade
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+Calculating upgrade... Done
+The following NEW packages will be installed:
+  motd-news-config python3-pexpect python3-ptyprocess
+The following packages will be upgraded:
+  accountsservice alsa-ucm-conf apport apt apt-utils base-files bcache-tools bind9-dnsutils bind9-host bind9-libs bolt
+  bsdutils busybox-initramfs busybox-static ca-certificates cloud-init command-not-found cryptsetup cryptsetup-bin
+  cryptsetup-initramfs cryptsetup-run curl distro-info-data fdisk finalrd gcc-10-base gir1.2-packagekitglib-1.0
+  initramfs-tools initramfs-tools-bin initramfs-tools-core krb5-locales language-selector-common libaccountsservice0
+  libapt-pkg6.0 libasound2 libasound2-data libblkid1 libbrotli1 libc-bin libc6 libcryptsetup12 libcurl3-gnutls
+  libcurl4 libdns-export1109 libefiboot1 libefivar1 libfdisk1 libfreetype6 libgcc-s1 libgl1 libglvnd0 libglx0
+  libgnutls30 libgssapi-krb5-2 libisc-export1105 libk5crypto3 libkrb5-3 libkrb5support0 libldap-2.4-2 libldap-common
+  liblzma5 libmaxminddb0 libmount1 libnetplan0 libnss-systemd libpackagekit-glib2-18 libpam-modules libpam-modules-bin
+  libpam-runtime libpam-systemd libpam0g libparted2 libperl5.30 libplymouth5 libproxy1v5 libpulse0 libpulsedsp
+  libpython3.8 libpython3.8-minimal libpython3.8-stdlib libsmartcols1 libssl1.1 libstdc++6 libsystemd0 libudev1
+  libuuid1 libuv1 libx11-6 libx11-data libx11-xcb1 locales mdadm mount netplan.io open-vm-tools openssl packagekit
+  packagekit-tools parted perl perl-base perl-modules-5.30 plymouth plymouth-theme-ubuntu-text pulseaudio-utils
+  python-apt-common python3-apport python3-apt python3-commandnotfound python3-cryptography python3-distupgrade
+  python3-distutils python3-gdbm python3-lib2to3 python3-problem-report python3-software-properties python3-urllib3
+  python3.8 python3.8-minimal rsyslog show-motd snapd software-properties-common sosreport sudo systemd systemd-sysv
+  systemd-timesyncd tmux tzdata ubuntu-minimal ubuntu-release-upgrader-core ubuntu-server ubuntu-standard ubuntu-wsl
+  udev unattended-upgrades update-motd util-linux uuid-runtime xz-utils zlib1g
+142 upgraded, 3 newly installed, 0 to remove and 0 not upgraded.
+Need to get 78.5 MB of archives.
+After this operation, 9127 kB of additional disk space will be used.
+Do you want to continue? [Y/n]
