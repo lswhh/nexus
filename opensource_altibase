@@ -1,7 +1,9 @@
 opensource altibase compile test
+wsl 20.04 설치
+sudo apt update
+sudo apt upgrade
+
 lswhh@DESKTOP-HQPQNKV:~$ sudo apt update
-lswhh@DESKTOP-HQPQNKV:~$ sudo apt update
-[sudo] password for lswhh:
 Get:1 http://security.ubuntu.com/ubuntu focal-security InRelease [109 kB]
 Hit:2 http://archive.ubuntu.com/ubuntu focal InRelease
 Get:3 http://archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
@@ -75,4 +77,56 @@ The following packages will be upgraded:
 142 upgraded, 3 newly installed, 0 to remove and 0 not upgraded.
 Need to get 78.5 MB of archives.
 After this operation, 9127 kB of additional disk space will be used.
-Do you want to continue? [Y/n]
+Do you want to continue? [Y/n]Y
+
+update-rc.d: warning: start and stop actions are no longer supported; falling back to defaults
+Setting up libnss-systemd:amd64 (245.4-4ubuntu3.3) ...
+Setting up plymouth-theme-ubuntu-text (0.9.4git20200323-0ubuntu6.2) ...
+update-initramfs: deferring update (trigger activated)
+Setting up libpam-systemd:amd64 (245.4-4ubuntu3.3) ...
+Setting up ubuntu-standard (1.450.2) ...
+Processing triggers for man-db (2.9.1-1) ...
+Processing triggers for dbus (1.12.16-2ubuntu2.1) ...
+Processing triggers for install-info (6.7.0.dfsg.2-5) ...
+Processing triggers for mime-support (3.64ubuntu1) ...
+Processing triggers for libc-bin (2.31-0ubuntu9.1) ...
+Processing triggers for ca-certificates (20201027ubuntu0.20.04.1) ...
+Updating certificates in /etc/ssl/certs...
+0 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
+Processing triggers for initramfs-tools (0.136ubuntu6.3) ...
+
+로케일 언어 설정
+sudo dpkg-reconfigure locales
+
+* en_US.UTF-8 UTF-8
+* ko_KR.EUC-KR EUC-KR
+* ko_KR.UTF-8 UTF-8
+
+3가지 선택(나머지는 모두 해제)후 기본 언어로 ko_KR.UTF-8 UTF-8 를 선택
+
+[옵션]
+윈도우와의 파일 공유 등 몇몇 이유로 시스템 기본 로케일을 euc-kr 로 했을 때 가장 큰 문제점은 nautilus 에서 파일을 만들면, 해당 파일명의 인코딩이 항상 UTF-8 로 된다는 것입니다.
+이 경우, 노틸러스의 기본 파일 인코딩을 euc-kr 로 바꿔 주면 됩니다.
+/etc/environment 에 다음의 라인을 추가합니다 :
+
+G_FILENAME_ENCODING=eucKR
+
+그리고, 시스템을 재시작하면, 노틸러스에서 한글 파일명을 생성해도 파일명의 encoding 이 eucKR 로 되어서 생성됩니다. (wsl은 잘 모르겠음)
+
+로케일 언어 설정
+lswhh@DESKTOP-HQPQNKV:~$ sudo apt-get install language-pack-ko
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following additional packages will be installed:
+  language-pack-ko-base
+The following NEW packages will be installed:
+  language-pack-ko language-pack-ko-base
+0 upgraded, 2 newly installed, 0 to remove and 0 not upgraded.
+Need to get 933 kB of archives.
+After this operation, 4018 kB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Get:1 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 language-pack-ko-base all 1:20.04+20200709 [931 kB]
+52% [1 language-pack-ko-base 604 kB/931 kB 65%]
