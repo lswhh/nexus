@@ -339,3 +339,22 @@ http://nok.altibase.com/x/T6VS
 
 ### 개발환경
 
+##### fork 하기
+
+![image-20201227153833732](C:\Users\ALTIBASE\AppData\Roaming\Typora\typora-user-images\image-20201227153833732.png)
+
+##### local에 clone 하기
+
+github desktop을 통해서 altibase opensource clone하기
+
+![image-20201227154118640](C:\Users\ALTIBASE\AppData\Roaming\Typora\typora-user-images\image-20201227154118640.png)
+
+default 경로로 아래 경로로 입력됨. 
+
+C:\Users\ALTIBASE\Documents\GitHub\altibase
+
+이 파일을 wsl로 복사하기 위해서 wsl에서 사용가능한 공유 폴더로 이동. 
+
+wsl은 c를 /mnt/c에 mount하고 있으므로 디렉토리 하나 생성해서 복사. 
+
+/mnt/c/share 디렉토리로 복사함. 
