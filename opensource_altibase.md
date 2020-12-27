@@ -341,13 +341,13 @@ http://nok.altibase.com/x/T6VS
 
 ##### fork 하기
 
-![image-20201227153833732](image\image-20201227153833732.png)
+![image-20201227153833732](image/image-20201227153833732.png)
 
 ##### local에 clone 하기
 
 github desktop을 통해서 altibase opensource clone하기
 
-![image-20201227154118640](image\image-20201227154118640.png)
+![image-20201227154118640](image/image-20201227154118640.png)
 
 default 경로로 아래 경로로 입력됨. 
 
