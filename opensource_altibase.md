@@ -411,6 +411,8 @@ jdk-11.0.8_linux-x64_bin.tar.gz  jdk-1_5_0_22-linux-amd64.bin  jdk-7u80-linux-i5
 
 ** 설치는... 확인 필요 **
 
+##### 개발에 필요한 툴 설치
+
 ```
 - Install development tools
   sudo apt install autoconf autopoint help2man texinfo gawk flex bison
@@ -432,5 +434,102 @@ Processing triggers for install-info (6.7.0.dfsg.2-5) ...
 Processing triggers for fontconfig (2.13.1-2ubuntu3) ...
 Processing triggers for mime-support (3.64ubuntu1) ...
 
+lswhh@DESKTOP-HQPQNKV:~/pkg$ which re2c
+lswhh@DESKTOP-HQPQNKV:~/pkg$ wget https://github.com/skvadrik/re2c/releases/download/2.0.3/re2c-2.0.3.tar.xz
+--2020-12-27 21:09:16--  https://github.com/skvadrik/re2c/releases/download/2.0.3/re2c-2.0.3.tar.xz
+Resolving github.com (github.com)... 52.78.231.108, 205.251.193.165
+...
+HTTP request sent, awaiting response... 200 OK
+Length: 1288996 (1.2M) [application/octet-stream]
+Saving to: ‘re2c-2.0.3.tar.xz’
+
+re2c-2.0.3.tar.xz                         100%[===================================================================================>]   1.23M   718KB/s    in 1.8s
+
+2020-12-27 21:09:19 (718 KB/s) - ‘re2c-2.0.3.tar.xz’ saved [1288996/1288996]
+lswhh@DESKTOP-HQPQNKV:~/pkg$ xz -d re2c-2.0.3.tar.xz
+lswhh@DESKTOP-HQPQNKV:~/pkg$ tar xvf re2c-2.0.3.tar
+re2c를 설치하기 위해 libtool 설치(autoconf -i에서 libtoolize를 사용함)
+lswhh@DESKTOP-HQPQNKV:~/pkg/re2c-2.0.3$ sudo apt install libtool
+...
+libtool (2.4.6-14) 설정하는 중입니다 ...
+libltdl-dev:amd64 (2.4.6-14) 설정하는 중입니다 ...
+Processing triggers for man-db (2.9.1-1) ...
+아래 사이트 보고 re2c 설치
+http://re2c.org/install/install.html
+
+lswhh@DESKTOP-HQPQNKV:~/pkg/re2c-2.0.3$ autoreconf -i -W all
+lswhh@DESKTOP-HQPQNKV:~/pkg/re2c-2.0.3$ ./configure && make 
+lswhh@DESKTOP-HQPQNKV:~/pkg/re2c-2.0.3$ sudo make install
+make  install-am
+make[1]: 디렉터리 '/home/lswhh/pkg/re2c-2.0.3' 들어감
+Reconfigure with --enable-docs to rebuild docs
+make[2]: 디렉터리 '/home/lswhh/pkg/re2c-2.0.3' 들어감
+ /usr/bin/mkdir -p '/usr/local/bin'
+  /bin/bash ./libtool   --mode=install /usr/bin/install -c re2c re2go '/usr/local/bin'
+libtool: install: /usr/bin/install -c re2c /usr/local/bin/re2c
+libtool: install: /usr/bin/install -c re2go /usr/local/bin/re2go
+ /usr/bin/mkdir -p '/usr/local/share/re2c/stdlib'
+ /usr/bin/install -c -m 644 include/unicode_categories.re '/usr/local/share/re2c/stdlib'
+ /usr/bin/mkdir -p '/usr/local/share/man/man1'
+ /usr/bin/install -c -m 644 doc/re2c.1 doc/re2go.1 '/usr/local/share/man/man1'
+make[2]: 디렉터리 '/home/lswhh/pkg/re2c-2.0.3' 나감
+make[1]: 디렉터리 '/home/lswhh/pkg/re2c-2.0.3' 나감
+
+...
+
+
+
 ```
 
+##### Fix build without Altibase internal SVN
+
+```
+src/id/idMakeRev.sh 
+
+@@ -1,3 +1,3 @@
+   #!/bin/sh
+
+ - LC_ALL=C svn info $ALTIBASE_DEV/src/ | grep URL | gawk '{print "#define ALTIBASE_SVN_URL \"" $2 "\""}'
+ - LC_ALL=C svn info $ALTIBASE_DEV/src/ | grep Revision | gawk '{print "#define ALTIBASE_SVN_REVISION " $2}'
+
+ + echo '#define ALTIBASE_SVN_URL ""'
+ + echo '#define ALTIBASE_SVN_REVISION 0'
+```
+
+
+
+##### changes for using gcc 7
+
+```
+src/pd/makefiles/platform_amd64_linux_lxpthread.GNU 
+
+
+@@ -27,8 +27,8 @@
+      CFLAGS  += -W -Wall -pipe \
+                 -D_POSIX_PTHREAD_SEMANTICS -D_POSIX_THREADS -D_POSIX_THREAD_SAFE_FUNCTIONS -D_REENTRANT \
+                 $(PLATFORM_AIO_SUPPORT)
+ -    CFLAGS  += -m64 -mtune=k8
+ -    CCFLAGS += $(CFLAGS) $(NO_IMPLICIT_TEMPLATES) -Wno-deprecated
+ +    CFLAGS  += -m64 -mtune=k8 -Wimplicit-fallthrough=0
+ +    CCFLAGS += $(CFLAGS) $(NO_IMPLICIT_TEMPLATES) -Wno-deprecated -Wno-narrowing -fpermissive
+      DCFLAGS += -g -DDEBUG
+      DCCFLAGS += -g -DDEBUG
+      BCFLAGS += -g
+```
+
+##### Other environment variable setting <-- 여기 할차례
+
+```
+- Other environment variable setting
+  export LANG=en_US.UTF-8
+  export ALTIDEV_HOME=/path/to/source_code_directory
+  export ALTIBASE_DEV=${ALTIDEV_HOME}
+  export ALTIBASE_HOME=${ALTIDEV_HOME}/altibase_home
+  export ALTIBASE_NLS_USE=UTF8
+  export ALTIBASE_PORT_NO=17730
+  export ADAPTER_JAVA_HOME=/path/to/jdk1.7
+  export JAVA_HOME=/path/to/jdk1.5
+  export PATH=.:${ALTIBASE_HOME}/bin:${JAVA_HOME}/bin:${PATH}
+  export CLASSPATH=.:${JAVA_HOME}/lib:${JAVA_HOME}/jre/lib:${ALTIBASE_HOME}/lib/Altibase.jar:${CLASSPATH}
+  export LD_LIBRARY_PATH=$ADAPTER_JAVA_HOME/jre/lib/amd64/server:${ALTIBASE_HOME}/lib:${LD_LIBRARY_PATH}
+```
