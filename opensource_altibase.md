@@ -345,7 +345,7 @@ http://nok.altibase.com/x/T6VS
 
 ##### local에 clone 하기
 
-github desktop을 통해서 altibase opensource clone하기
+windows에서 github desktop을 통해서 altibase opensource clone하기
 
 ![image-20201227154118640](image/image-20201227154118640.png)
 
@@ -353,11 +353,21 @@ default 경로로 아래 경로로 입력됨.
 
 C:\Users\ALTIBASE\Documents\GitHub\altibase
 
-이 파일을 wsl로 복사하기 위해서 wsl에서 사용가능한 공유 폴더로 이동. 
+**주의: windows에서 다운받은 파일은 리턴 캐릭터로 인해서 configure에서 문제가 발생하므로, wsl에서 직접 git clone을 통해서 다운받아야 한다. 
 
-wsl은 c를 /mnt/c에 mount하고 있으므로 디렉토리 하나 생성해서 복사. 
+linux에서 git clone하기
 
-/mnt/c/share 디렉토리로 복사함. 
+```
+lswhh@DESKTOP-HQPQNKV:~/work$ git clone https://github.com/lswhh/altibase.git altibase
+Cloning into 'altibase'...
+remote: Enumerating objects: 1, done.
+remote: Counting objects: 100% (1/1), done.
+remote: Total 13996 (delta 0), reused 1 (delta 0), pack-reused 13995
+Receiving objects: 100% (13996/13996), 109.77 MiB | 9.10 MiB/s, done.
+Resolving deltas:  99% (9036/9127)
+```
+
+
 
 ##### JAVA 설치
 
@@ -481,7 +491,28 @@ make[1]: 디렉터리 '/home/lswhh/pkg/re2c-2.0.3' 나감
 
 ```
 
+### Altibase Compile 
+
+##### source download (clone)
+
+lswhh@DESKTOP-HQPQNKV:~/work$ git clone https://github.com/lswhh/altibase.git
+
+```
+lswhh@DESKTOP-HQPQNKV:~/work$ git clone https://github.com/lswhh/altibase.git altibase
+Cloning into 'altibase'...
+remote: Enumerating objects: 1, done.
+remote: Counting objects: 100% (1/1), done.
+remote: Total 13996 (delta 0), reused 1 (delta 0), pack-reused 13995
+Receiving objects: 100% (13996/13996), 109.77 MiB | 9.10 MiB/s, done.
+Resolving deltas:  99% (9036/9127)
+
+```
+
+
+
 ##### Fix build without Altibase internal SVN
+
+아래 내용은 opensource code에 이미 적용되어 있으므로 skip함. 
 
 ```
 src/id/idMakeRev.sh 
@@ -533,3 +564,132 @@ src/pd/makefiles/platform_amd64_linux_lxpthread.GNU
   export CLASSPATH=.:${JAVA_HOME}/lib:${JAVA_HOME}/jre/lib:${ALTIBASE_HOME}/lib/Altibase.jar:${CLASSPATH}
   export LD_LIBRARY_PATH=$ADAPTER_JAVA_HOME/jre/lib/amd64/server:${ALTIBASE_HOME}/lib:${LD_LIBRARY_PATH}
 ```
+
+${HOME}/work/altibase에 소스를 다운받은 경로로 하여 아래와 같이 설정한다. 
+
+lswhh@DESKTOP-HQPQNKV:~$ vi .altidevEnv
+
+  export LANG=en_US.UTF-8
+  export ALTIDEV_HOME=${HOME}/work/altibase
+  export ALTIBASE_DEV=${ALTIDEV_HOME}
+  export ALTIBASE_HOME=${ALTIDEV_HOME}/altibase_home
+  export ALTIBASE_NLS_USE=UTF8
+  export ALTIBASE_PORT_NO=20077
+  export ADAPTER_JAVA_HOME=${HOME}/JAVA/jdk1.7.0_80
+  export JAVA_HOME=${HOME}/JAVA/jdk1.5.0_22
+  export PATH=.:${ALTIBASE_HOME}/bin:${JAVA_HOME}/bin:${PATH}
+  export CLASSPATH=.:${JAVA_HOME}/lib:${JAVA_HOME}/jre/lib:${ALTIBASE_HOME}/lib/Altibase.jar:${CLASSPATH}
+  export LD_LIBRARY_PATH=$ADAPTER_JAVA_HOME/jre/lib/amd64/server:${ALTIBASE_HOME}/lib:${LD_LIBRARY_PATH}
+
+##### configure & make & build
+
+```
+lswhh@DESKTOP-HQPQNKV:~/work/altibase$ ./configure
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking for gcc... gcc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables...
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /usr/bin/grep
+checking for egrep... /usr/bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking whether byte ordering is bigendian... no
+checking for grep... (cached) /usr/bin/grep
+checking for make... /usr/bin/make
+checking checking if your make is GNU or not... Ok. You have a GNU make utility
+checking for gawk... /usr/bin/gawk
+checking for flex... /usr/bin/flex
+checking for bison... /usr/bin/bison
+Checking Bison header postfix.
+./test.y:1.1-12: warning: POSIX Yacc does not support %pure_parser [-Wyacc]
+    1 | %pure_parser
+      | ^~~~~~~~~~~~
+./test.y:1.1-12: warning: deprecated directive: '%pure_parser', use '%define api.pure' [-Wdeprecated]
+    1 | %pure_parser
+      | ^~~~~~~~~~~~
+      | %define api.pure
+./test.y: warning: fix-its can be applied.  Rerun with option '--update'. [-Wother]
+   BISON POSTFIX ==> .hpp
+checking Java version... 1.5.0_22
+checking for javac... /home/lswhh/JAVA/jdk1.5.0_22/bin/javac
+checking for gperf... no
+checking for ld... /usr/bin/ld
+checking for ar... /usr/bin/ar
+checking for as... /usr/bin/as
+checking for re2c... /usr/local/bin/re2c
+checking for sched_setaffinity... yes
+checking for pthread_setaffinity_np in -lpthread... yes
+checking for ecvt_r... yes
+checking for fcvt_r... yes
+checking for _gcvt_s... no
+checking for gcvt... yes
+configure: Configuring for %%% Altibase HDB %%%...
+configure: WARNING: "BUILD_MODE is %%% debug %%%"
+configure: WARNING: "LINK_MODE is %%% normal %%%"
+configure: Enable FIT mode
+configure: WARNING: " %%%% X86_64 LINUX 64BIT COMPILE PROCEEDING %%%%"
+configure: WARNING: " %%%% X86_64 LINUX 64BIT COMPILE PROCEEDING %%%%"
+configure: WARNING: "EDITION is STANDARD "
+configure: creating platform.mk from platform_gcc.mk
+configure: WARNING: "COMPILER_NAME is %%% GCC %%% "
+
+*** Checking LINUX PACKAGE INFORMATION ***
+Package Name : << ubuntu >> Package Version : << 20.04.1 >>
+
+*** Check Success. ***
+
+OS_KERNEL_RELEASE_MAJOR = 4
+OS_KERNEL_RELEASE_MINOR = 19
+
+--- TARGET OS is X86_64_LINUX ---
+--- MAJOR VER is 0 ---
+--- MINOR VER is 0 ---
+configure: creating ./config.status
+config.status: creating env.mk
+config.status: creating vars.mk
+config.status: creating ./makefiles/config.mk
+config.status: creating ./src/core/include/acpConfigPlatform.h
+config.status: ./src/core/include/acpConfigPlatform.h is unchanged
+config.status: creating ./src/pd/makeinclude/config-altibase.h
+config.status: ./src/pd/makeinclude/config-altibase.h is unchanged
+config.status: creating ./src/id/idConfig.h
+config.status: ./src/id/idConfig.h is unchanged
+config.status: linking ./src/id/idConfig.h to ./src/id/include/idConfig.h
+
+```
+
+
+
+```
+ring macro [-Wliteral-suffix]
+  258 |                     aOptStr", errno=%"ID_INT32_FMT,                      \
+      |                            ^
+In file included from /home/lswhh/work/altibase/src/cm/include/cmAll.h:61,
+                 from /home/lswhh/work/altibase/src/cm/cmb/cmbBlock.cpp:17:
+/home/lswhh/work/altibase/src/cm/include/cmnLinkPrivate.h:21:10: fatal error: openssl/ssl.h: No such file or directory
+   21 | #include <openssl/ssl.h>
+      |          ^~~~~~~~~~~~~~~
+compilation terminated.
+make[4]: *** [..//../../env.mk:652: /home/lswhh/work/altibase/target/debug/src/cm/cmb/cmbBlock.o] Error 1
+make[3]: *** [Makefile:12: cmb] Error 2
+make[2]: *** [Makefile:22: compile] Error 2
+make[1]: *** [Makefile:35: /home/lswhh/work/altibase/src/cm] Error 2
+make: *** [Makefile:443: build] Error 2
+```
+
