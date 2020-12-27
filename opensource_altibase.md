@@ -358,3 +358,79 @@ C:\Users\ALTIBASE\Documents\GitHub\altibase
 wsl은 c를 /mnt/c에 mount하고 있으므로 디렉토리 하나 생성해서 복사. 
 
 /mnt/c/share 디렉토리로 복사함. 
+
+##### JAVA 설치
+
+```
+- Install both of Oracle Java JDK 1.5 and 1.7
+  Go to https://www.oracle.com/technetwork/java/archive-139210.html
+  JDK 1.5 : jdk-1_5_0_22-linux-amd64-rpm.bin or jdk-1_5_0_22-linux-amd64.bin
+  JDK 1.7 : jdk-7u80-linux-x64.rpm or jdk-7u80-linux-x64.tar.gz
+```
+
+아래에 java 설치 완료, jdk1.5만 바이너리 실행 하면 압축 해제 됨. 
+
+나머지는 tar로 압축 풀기
+
+lswhh@DESKTOP-HQPQNKV:~$ pwd
+/home/lswhh
+lswhh@DESKTOP-HQPQNKV:~$ cd JAVA/
+lswhh@DESKTOP-HQPQNKV:~/JAVA$ ls
+jdk-11.0.8  jdk1.5.0_22  jdk1.7.0_80
+lswhh@DESKTOP-HQPQNKV:~/JAVA$
+
+##### Openssl 설치
+
+```
+- Install OpenSSL
+  Remove existing openssl (Ubuntu 18.04 example)
+    sudo mv /usr/include/openssl /usr/include/openssl.original
+    sudo mv /usr/include/x86_64-linux-gnu/openssl /usr/include/x86_64-linux-gnu/openssl.original
+  Download : https://www.openssl.org/source/openssl-1.0.2o.tar.gz
+  Make a symbolic link : sudo ln -s /usr/local/ssl/include/openssl /usr/include/openssl
+```
+
+lswhh@DESKTOP-HQPQNKV:~/pkg$ pwd
+/home/lswhh/pkg
+lswhh@DESKTOP-HQPQNKV:~/pkg$ wget https://www.openssl.org/source/openssl-1.0.2o.tar.gz
+--2020-12-27 21:01:05--  https://www.openssl.org/source/openssl-1.0.2o.tar.gz
+Resolving www.openssl.org (www.openssl.org)... 104.74.201.89, 23.65.188.44, 23.53.2.175, ...
+접속 www.openssl.org (www.openssl.org)|104.74.201.89|:443... 접속됨.
+HTTP request sent, awaiting response... 200 OK
+Length: 5329472 (5.1M) [application/x-gzip]
+Saving to: ‘openssl-1.0.2o.tar.gz’
+
+openssl-1.0.2o.tar.gz                      100%[=====================================================================================>]   5.08M  11.1MB/s    in 0.5s
+
+2020-12-27 21:01:07 (11.1 MB/s) - ‘openssl-1.0.2o.tar.gz’ saved [5329472/5329472]
+
+lswhh@DESKTOP-HQPQNKV:~/pkg$ tar xvzf openssl-1.0.2o.tar.gz
+
+lswhh@DESKTOP-HQPQNKV:~/pkg$ ls
+jdk-11.0.8_linux-x64_bin.tar.gz  jdk-1_5_0_22-linux-amd64.bin  jdk-7u80-linux-i586.tar.gz  openssl-1.0.2o  openssl-1.0.2o.tar.gz
+
+** 설치는... 확인 필요 **
+
+```
+- Install development tools
+  sudo apt install autoconf autopoint help2man texinfo gawk flex bison
+  .....
+  libxml-sax-expat-perl (0.51-1) 설정하는 중입니다 ...
+update-perl-sax-parsers: Registering Perl SAX parser XML::SAX::Expat with priority 50...
+update-perl-sax-parsers: Updating overall Perl SAX parser modules info file...
+Replacing config file /etc/perl/XML/SAX/ParserDetails.ini with new version
+Processing triggers for install-info (6.7.0.dfsg.2-5) ...
+Processing triggers for man-db (2.9.1-1) ...
+
+  flex (2.5.35 version) (https://github.com/westes/flex/releases) (install method: https://github.com/westes/flex)
+  bison (2.4.1 version) (http://ftp.gnu.org/gnu/bison/)
+  sudo apt install libncurses5-dev binutils-dev ddd tkcvs manpages-dev libldap2-dev
+  ...
+  Processing triggers for libc-bin (2.31-0ubuntu9.1) ...
+Processing triggers for man-db (2.9.1-1) ...
+Processing triggers for install-info (6.7.0.dfsg.2-5) ...
+Processing triggers for fontconfig (2.13.1-2ubuntu3) ...
+Processing triggers for mime-support (3.64ubuntu1) ...
+
+```
+
