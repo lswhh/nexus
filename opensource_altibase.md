@@ -548,7 +548,7 @@ src/pd/makefiles/platform_amd64_linux_lxpthread.GNU
       BCFLAGS += -g
 ```
 
-##### Other environment variable setting <-- 여기 할차례
+##### Other environment variable setting 
 
 ```
 - Other environment variable setting
