@@ -1,6 +1,6 @@
-THREAD SAFE LOCK FREE DOUBLE LINKED LIST MEMORY FREE ALGORITHM 
+# THREAD SAFE LOCK FREE DOUBLE LINKED LIST MEMORY FREE ALGORITHM (PROGRESS COUNTER  ALGORITHM) 
 
-(PROGRESS COUNTER  ALGORITHM) 
+
 
 **차례** 
 
@@ -28,7 +28,7 @@ THREAD SAFE LOCK FREE DOUBLE LINKED LIST MEMORY FREE ALGORITHM
 
 자료구조 
 
-typedef struct acl\_safelist\_node\_t { ![](Aspose.Words.198bad08-cb4f-41bc-9e33-4e68117472d6.001.png)
+typedef struct acl\_safelist\_node\_t { 
 
 `    `struct acl\_safelist\_node\_t\*     mPrev;      /\* Previous Node \*/
 
@@ -81,7 +81,8 @@ GC 재 시작 시점  ![](Aspose.Words.198bad08-cb4f-41bc-9e33-4e68117472d6.005.
 
 Counter1을 증가시킴 
 
-2. Inprogress Counter2가 0이 되면 앞으로 CS에 진 입하는 모든 스레드는 InProgressCounter1에 의해 컨트롤 할 수 있다는 의미가 되며 다시 GC Flag를 InProgress  설정하고 Garbage Collect를 할 수 있음.  Counter2(1)  3. 이후 어떤 스레드가 GarbageCollect를 호출하게되 면 알고리즘 처음부터 GC를 수행함  
+2. Inprogress Counter2가 0이 되면 앞으로 CS에 진 입하는 모든 스레드는 InProgressCounter1에 의해 컨트롤 할 수 있다는 의미가 되며 다시 GC Flag를 InProgress  설정하고 Garbage Collect를 할 수 있음.  
+3. 이후 어떤 스레드가 GarbageCollect를 호출하게되 면 알고리즘 처음부터 GC를 수행함  
 
 **규칙** 
 
@@ -94,11 +95,7 @@ Counter1을 증가시킴
 **검증결과** 
 
 
-- 테스트 프로그램을 수행하였을 이 모든 메모리가 해제되었음을
-
- 때 다음과 같
-
-` `확인하였음. 
+- 테스트 프로그램을 수행하였을 이 모든 메모리가 해제되었음을 확인하였음. 
 
 
 ==6946== 
@@ -120,13 +117,12 @@ Counter1을 증가시킴
 **정리** 
 
 - 장점  
-- GC를 위해 추가로 들어가는 메모리가 크지 않아 공 간 효율적임 
+  - GC를 위해 추가로 들어가는 메모리가 크지 않아 공간 효율적임 
+    - Counter 및 기타 컨트롤 변수 몇 가지 정도 
 
-• Counter 및 기타 컨트롤 변수 몇 가지 정도 
-
-- 리스트를 접근하는 스레드는 특정 counter변수 세 개를 접근하는 작업만이 추가되므로 성능에 크게 영 향을 미치지 않을 것으로 예측됨 
+  - 리스트를 접근하는 스레드는 특정 counter변수 세 개를 접근하는 작업만이 추가되므로 성능에 크게 영 향을 미치지 않을 것으로 예측됨 
 - 단점 
-- Reference counter 오동작을 방지하기 위해 스레드 가 접근 규칙을 지켜야 하며 그렇지 않는 경우 메모 리 누수가 있을 수 있음. 
+  - Reference counter 오동작을 방지하기 위해 스레드 가 접근 규칙을 지켜야 하며 그렇지 않는 경우 메모 리 누수가 있을 수 있음. 
 
 
 
