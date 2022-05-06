@@ -75,13 +75,9 @@ GC 플래그 및 스레드들의 진행 상황 파악  ![](Aspose.Words.198bad08
 
 GC 재 시작 시점  ![](Aspose.Words.198bad08-cb4f-41bc-9e33-4e68117472d6.005.png)
 
-1. InProgress Counter2는 GC Flag가 unset되어있으 listNext  므로, 현재 진행중인 스레드들이 모두 빠져나가는
+1. InProgress Counter2는 GC Flag가 unset되어있으 listNext  므로, 현재 진행중인 스레드들이 모두 빠져나가는 순간 0이되며, GC Flag가 unset되어있는 것을 본 listPrev  다른 스레드들은 지금부터 진입할 때 InProgress Counter1을 증가시킴 
 
-순간 0이되며, GC Flag가 unset되어있는 것을 본 listPrev  다른 스레드들은 지금부터 진입할 때 InProgress 
-
-Counter1을 증가시킴 
-
-2. Inprogress Counter2가 0이 되면 앞으로 CS에 진 입하는 모든 스레드는 InProgressCounter1에 의해 컨트롤 할 수 있다는 의미가 되며 다시 GC Flag를 InProgress  설정하고 Garbage Collect를 할 수 있음.  
+2. Inprogress Counter2가 0이 되면 앞으로 CS에 진 입하는 모든 스레드는 InProgressCounter1에 의해 컨트롤 할 수 있다는 의미가 되며 다시 GC Flag를 InProgress 설정하고 Garbage Collect를 할 수 있음.
 3. 이후 어떤 스레드가 GarbageCollect를 호출하게되 면 알고리즘 처음부터 GC를 수행함  
 
 **규칙** 
