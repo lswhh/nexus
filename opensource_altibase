@@ -339,3 +339,22 @@ http://nok.altibase.com/x/T6VS
 
 ### 개발환경
 
+Index: src/pd/makefiles/platform_amd64_linux_lxpthread.GNU
+===================================================================
+--- src/pd/makefiles/platform_amd64_linux_lxpthread.GNU (revision 95032)
++++ src/pd/makefiles/platform_amd64_linux_lxpthread.GNU (working copy)
+@@ -27,8 +27,10 @@
+ CFLAGS  += -W -Wall -pipe \
+            -D_POSIX_PTHREAD_SEMANTICS -D_POSIX_THREADS -D_POSIX_THREAD_SAFE_FUNCTIONS -D_REENTRANT \
+            $(PLATFORM_AIO_SUPPORT)
+-CFLAGS  += -m64 -mtune=k8
+-CCFLAGS += $(CFLAGS) $(NO_IMPLICIT_TEMPLATES) -Wno-deprecated
++#CFLAGS  += -m64 -mtune=k8
++CFLAGS  += -m64 -mtune=k8 -Wimplicit-fallthrough=0
++#CCFLAGS += $(CFLAGS) $(NO_IMPLICIT_TEMPLATES) -Wno-deprecated
++CCFLAGS += $(CFLAGS) $(NO_IMPLICIT_TEMPLATES) -Wno-deprecated -Wno-deprecated-declarations -Wno-literal-suffix -Wno-narrowing -fpermissive
+ DCFLAGS += -g -DDEBUG
+ DCCFLAGS += -g -DDEBUG
+ BCFLAGS += -g
+
+
